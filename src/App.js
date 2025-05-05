@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Home from './pages/Home'
+import CreatePost from './pages/CreatePost'
+import Post from './pages/Post'
+import Registration from './pages/Registration'
+import Login from './pages/Login'
+import PageNotFound from './pages/PageNotFound'
+import Navbar from './components/Navbar'
+import ProtectedRoute from './components/ProtectedRoute'
+import Profile from './pages/Profile'
+import ChangePassword from './pages/ChangePassword'
 
-function App() {
+const App = () => {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path='/createpost' element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
+          <Route path='/posts/:id' element={<ProtectedRoute><Post /></ProtectedRoute>} />
+          <Route path='/profile/:id' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path='/changepassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Registration />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
