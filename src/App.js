@@ -11,6 +11,9 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import ChangePassword from './pages/ChangePassword'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const App = () => {
 
 
@@ -19,15 +22,18 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path='/createpost' element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
-          <Route path='/posts/:id' element={<ProtectedRoute><Post /></ProtectedRoute>} />
-          <Route path='/profile/:id' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path='/changepassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/createpost' element={<CreatePost />} />
+            <Route path='/posts/:id' element={<Post />} />
+            <Route path='/profile/:id' element={<Profile />} />
+            <Route path='/changepassword' element={<ChangePassword />} />
+          </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
+          <ToastContainer />
       </Router>
     </div>
   )
