@@ -148,7 +148,7 @@ const Post = () => {
                     <span>{new Date(post.createdAt).toLocaleString()}</span>
                 </div> 
             </div>
-            <div className="pt-4 border-t text-gray-600 font-medium">
+            <div className="pt-4 border-t text-gray-600 font-medium" id="comments">
                 {/* Comment Section */}
                 <div
                     className="space-y-2"

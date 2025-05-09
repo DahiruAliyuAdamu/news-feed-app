@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 
+import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
+
 const CreatePost = () => {
     let navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
     const BASE_URL = process.env.REACT_APP_API_URL
 
@@ -19,19 +23,29 @@ const CreatePost = () => {
         postText: Yup.string().required("You must input a post Text"),
     })
 
-    const onSubmit = data => {
-        const headerValues = {
-            headers: {
-                accessToken: localStorage.getItem('accessToken')
-            }
-        }      
-        axios.post(`${BASE_URL}/posts`, data, headerValues).then(response => {
-            if (response.data.error) {
-                alert(response.data.error)
+    const onSubmit = async data => {
+        setLoading(true)
+
+        try {
+            const headerValues = {
+                headers: {
+                    accessToken: localStorage.getItem('accessToken')
+                }
+            }      
+            const response = await axios.post(`${BASE_URL}/posts`, data, headerValues)
+            const resData = response.data
+
+            if (resData.error) {
+                toast.error(resData.error)
             } else {
+                toast.success('Posted successfully')
                 navigate('/')
             }
-        })
+        } catch (err) {
+            toast.error(err)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -61,11 +75,17 @@ const CreatePost = () => {
                         <ErrorMessage name="postText" component="div" className="text-red-500 text-sm" />
                     </div>
 
-                    <button 
-                        type="submit"
-                        className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+                    <button
+                        className="relative w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition h-12"
+                        disabled={loading}
                     >
-                        Create Post
+                        {loading ? (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <FaSpinner className="animate-spin text-white text-lg" />
+                            </div>
+                        ) : (
+                            "Create Post"
+                        )}
                     </button>
                 </Form>
             </Formik>

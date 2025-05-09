@@ -5,35 +5,52 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
 
+import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
+
 const Login = () => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const { setAuthState } = useContext(AuthContext)
 
     const BASE_URL = process.env.REACT_APP_API_URL
     
-    const loginUser = () => {
-        const data  = {
-            username: username,
-            password: password
+    const loginUser = async () => {
+
+        if (!username || !password) {
+            toast.warning("Username and password are required.")
+            return
         }
-        axios.post(`${BASE_URL}/auth/login`, data).then(response => {
+
+        const data = { username, password }
+        setLoading(true)
+
+        try {
+            const response = await axios.post(`${BASE_URL}/auth/login`, data)
+            const resData = response.data
             
-            if (response.data.error) {
-                alert(response.data.error)
+            if (resData.error) {
+                toast.error(resData.error)
             } else {
-                localStorage.setItem("accessToken", response.data.token)
+                localStorage.setItem('accessToken', resData.token)
                 setAuthState({
-                    username: response.data.username, id: response.data._id, status: true
+                    username: resData.username, 
+                    id: resData._id, 
+                    status: true
                 })
-                setUsername("")
-                setPassword("")
+                setUsername('')
+                setPassword('')
+                toast.success('Login successful!')
                 navigate('/')
             }
-        }).catch (err => {
-            console.log(err.message)
-        })
+        } catch (err) {
+            console.error('Login error:', err)
+            toast.error('Something went wrong. Please try again.')
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -52,11 +69,18 @@ const Login = () => {
                 onChange={e => setPassword(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <button 
+            <button
                 onClick={loginUser}
-                className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition"
+                className="relative w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition h-12"
+                disabled={loading}
             >
-                Login
+                {loading ? (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <FaSpinner className="animate-spin text-white text-lg" />
+                    </div>
+                ) : (
+                    "Login"
+                )}
             </button>
         </div>
     )        

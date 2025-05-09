@@ -6,6 +6,7 @@ import { AuthContext } from '../helpers/AuthContext'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { BsChatDots    } from 'react-icons/bs'
 
 const Home = () => {
     const [posts, setPosts] = useState([])
@@ -115,16 +116,27 @@ const Home = () => {
                                     post.isLiked ? (
                                     <ThumbUpIcon 
                                         onClick={() => likeAPost(post._id)}
+                                        title="Unlike Post"
                                         className="text-blue-600 cursor-pointer hover:text-blue-700 transition duration-200"
                                     />
                                     ) : (
                                     <ThumbUpOffAltIcon
                                         onClick={() => likeAPost(post._id)}
+                                        title="Like Post"
                                         className="text-gray-500 cursor-pointer hover:text-blue-500 transition duration-200"
                                     />
                                     )
                                 }
                                 <span className="text-gray-700 font-medium">{post.likeCount}</span>
+                            </div>
+
+                            <div className="flex items-center gap-2 text-sm">
+                                <BsChatDots     
+                                    onClick={() => navigate(`/posts/${post._id}#comments`)}
+                                    className="text-gray-500 cursor-pointer hover:text-green-600 transition duration-200"
+                                    title="View Comments"
+                                />
+                                <span className="text-gray-600">{post.commentCount || 0}</span>
                             </div>
         
                             <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">

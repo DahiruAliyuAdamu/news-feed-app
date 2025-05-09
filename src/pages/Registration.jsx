@@ -1,13 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
 
+import { FaSpinner } from 'react-icons/fa'
+import { toast } from 'react-toastify'
+
 const Registration = () => {
     const navigate = useNavigate()
     const { setAuthState } = useContext(AuthContext)
+    const [loading, setLoading] = useState(false)
     const initialValues = {
         fullName: '',
         username: '',
@@ -24,6 +28,7 @@ const Registration = () => {
 
     const validationSchema = Yup.object().shape({
         fullName: Yup.string()
+            .trim()
             .required('Full name is required'),
         username: Yup.string()
             .min(4, 'Username must be at least 4 characters')
@@ -46,15 +51,25 @@ const Registration = () => {
             .url('Invalid image URL'),
     })
 
-    const registerUser = (data, { resetForm }) => {
-        // console.log(data)
-        axios.post(`${BASE_URL}/auth`, data).then(response => {
-            // console.log(response)
+    const registerUser = async (data, { resetForm }) => {
+        setLoading(true)
+        
+        try {
+            const response = await axios.post(`${BASE_URL}/auth`, data)
+
+            // response.data.message && console.log(response.data.message)
+
             resetForm()
             localStorage.removeItem('accessToken')
             setAuthState({username: "", id: "", status: false})
+            toast.success('User register successful')
             navigate('/login')
-        })
+        } catch (error) {
+            const msg = error.response?.data?.message || "Something went wrong. Please try again.";
+            toast.error(`Registration failed: ${msg}`)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -190,10 +205,16 @@ const Registration = () => {
     
                     {/* Submit */}
                     <button
-                        type="submit"
-                        className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                        className="relative w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition h-12"
+                        disabled={loading}
                     >
-                        Register User
+                        {loading ? (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <FaSpinner className="animate-spin text-white text-lg" />
+                            </div>
+                        ) : (
+                            "Register User"
+                        )}
                     </button>
                 </Form>
             </Formik>
