@@ -55,9 +55,7 @@ const Registration = () => {
         setLoading(true)
         
         try {
-            const response = await axios.post(`${BASE_URL}/auth`, data)
-
-            // response.data.message && console.log(response.data.message)
+            await axios.post(`${BASE_URL}/auth`, data)
 
             resetForm()
             localStorage.removeItem('accessToken')
