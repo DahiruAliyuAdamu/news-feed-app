@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
 
-const ProtectedRoute = ({ children }) => {
+// const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
     const { authState, loading } = useContext(AuthContext)
 
     if (loading) return (
@@ -11,7 +12,8 @@ const ProtectedRoute = ({ children }) => {
         </div>
     )
     
-    return authState.status ? children : <Navigate to='/login' replace />
+    // return authState.status ? children : <Navigate to='/login' replace />
+    return authState.status ? <Outlet /> : <Navigate to='/login' replace />
 }
 
 export default ProtectedRoute
