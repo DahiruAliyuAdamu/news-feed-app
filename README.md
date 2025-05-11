@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# React Client App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application built with **React.js** and **Tailwind CSS**, featuring user authentication, protected routes, post creation, and profile management.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- 🔐 User Authentication (Login, Registration, Change Password)
+- 🧾 Create and View Posts
+- 🧍 Profile Management
+- 🔒 Protected Routes
+- 🎨 Tailwind CSS for Styling
+- ⚛️ React Context API for Auth State
+- 🔧 Environment-based configuration (`.env.local`, `.env.production`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧱 Project Structure
 
-### `npm test`
+```
+client/
+├── public/              # Static files
+├── src/                 # React source files
+│   ├── components/      # Reusable components (Navbar, EditPostModal, etc.)
+│   ├── helpers/         # Context and utility files
+│   ├── pages/           # Main page components (Login, Profile, Home, etc.)
+│   ├── App.js           # Main routing logic
+│   ├── index.js         # Entry point
+│   └── App.css          # Global styles
+├── .env.local           # Local development env variables
+├── .env.production      # Production env variables
+├── tailwind.config.js   # TailwindCSS configuration
+├── postcss.config.js    # PostCSS config
+└── package.json         # Project metadata and dependencies
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📦 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Node.js (>= 14)
+- npm or yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+```bash
+git clone <repository-url>
+cd client
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running Locally
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## ⚙️ Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Set the following in your `.env.local` or `.env.production` file:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```env
+REACT_APP_API_URL=https://your-backend-api.com
+```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🧪 Scripts
 
-### Analyzing the Bundle Size
+| Command            | Description                         |
+|-------------------|-------------------------------------|
+| `npm start`       | Run app in development mode         |
+| `npm run build`   | Create a production-ready build     |
+| `npm test`        | Run tests (if configured)           |
+| `npm run lint`    | Lint JS files (if ESLint configured)|
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧰 Built With
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [React.js](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Router DOM](https://reactrouter.com/)
+- [Context API](https://reactjs.org/docs/context.html)
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🛡️ License
 
-### Deployment
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🙋‍♀️ Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Please fork the repository and create a pull request.
+
+---
+
+## 📬 Contact
+
+For issues or feature requests, please open an issue on the GitHub repository.
