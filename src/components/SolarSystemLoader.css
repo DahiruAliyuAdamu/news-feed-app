@@ -1,0 +1,83 @@
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.sun {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffcc00, #ff9900);
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #ff9900;
+    position: absolute;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.orbit1 {
+    width: 100px;
+    height: 100px;
+    animation: rotate1 6s infinite linear;
+}
+.orbit2 {
+    width: 150px;
+    height: 150px;
+    animation: rotate2 10s infinite linear;
+}
+.orbit3 {
+    width: 200px;
+    height: 200px;
+    animation: rotate3 14s infinite linear;
+}
+.orbit4 {
+    width: 250px;
+    height: 250px;
+    animation: rotate4 18s infinite linear;
+}
+
+.planet {
+    width: 10px;
+    height: 10px;
+    background-color: #00ccff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #00ccff;
+}
+
+.planet2 { background-color: #ff66cc; box-shadow: 0 0 10px #ff66cc; }
+.planet3 { background-color: #66ff66; box-shadow: 0 0 10px #66ff66; }
+.planet4 { background-color: #ff3333; box-shadow: 0 0 10px #ff3333; }
+
+@keyframes rotate1 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes rotate2 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes rotate3 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes rotate4 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
